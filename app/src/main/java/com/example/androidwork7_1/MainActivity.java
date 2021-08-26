@@ -20,22 +20,21 @@ Button btngo;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btngo = findViewById(R.id.btngo);
-        Date dt = new Date();
-        int hourse = dt.getHours();
         btngo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Date dt = new Date();
+                int hourse = dt.getHours();
                 Intent intent = new Intent(Intent.ACTION_SYNC);
-                if (hourse > 6 && hourse < 14){
+                if (hourse >= 6 && hourse <= 14){
                     Log.d(LOG, "Утро");
                     intent.setData(Uri.parse("http://morning"));
-                }else if (hourse > 14 && hourse < 15){
+                }else if (hourse >= 14 && hourse <= 15){
                     Log.d(LOG, "Дневная");
-                    intent.setData(Uri.parse("http://afternoon "));
-                }else if (hourse > 15 && hourse < 6){
+                    intent.setData(Uri.parse("http://afternoon"));
+                }else{
                     Log.d(LOG, "Вечерняя");
-                    intent.setData(Uri.parse("http://evening "));
+                    intent.setData(Uri.parse("http://evening"));
                 }
                 startActivity(intent);
             }
